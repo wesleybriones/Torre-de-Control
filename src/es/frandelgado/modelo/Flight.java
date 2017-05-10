@@ -17,10 +17,10 @@ public class Flight implements Comparable<Flight>, Comparator<Flight> {
     private double distanceToUs;
     private Date controlDateTime;
 
-    public static Comparator<Flight> comparadorPorAerolinea = new Comparator<Flight>() {
+    public static Comparator<Flight> compareBySpeed = new Comparator<Flight>() {
         @Override
         public int compare(Flight f1, Flight f2) {
-            return f1.getAirline().compareToIgnoreCase(f2.getAirline());
+            return (int)(f2.getSpeed() - f1.getSpeed());
         }
     };
 
@@ -113,7 +113,15 @@ public class Flight implements Comparable<Flight>, Comparator<Flight> {
 
     @Override
     public int compare(Flight f1, Flight f2) {
-        return f1.getFlightCode().compareToIgnoreCase(f2.getFlightCode());
+        int res;
+
+        res = f1.getAirline().compareToIgnoreCase(f2.getAirline());
+        if( res != 0) {
+            return res;
+        }
+
+//        return (int)(f1.getSpeed() - f2.getSpeed());
+        return Double.compare(f1.getSpeed(), f2.getSpeed());
     }
 
     @Override

@@ -20,7 +20,9 @@ public class Radar {
 
 
     public void addflight(Flight flight) {
-        flights.add(flight);
+        if( flight != null){
+            flights.add(flight);
+        }
     }
 
     public void flightList() {
@@ -47,20 +49,30 @@ public class Radar {
 
         for (Flight flight :
                 flights) {
+
             newDate = new Date();
+
             timeElapsed = (newDate.getTime() - flight.getControlDateTime().getTime()) / MILISECONDS_IN_SECOND;
             flight.setControlDateTime(newDate);
             speedMetersPerSecond = flight.getSpeed() * MILISECONDS_IN_SECOND / SECONDS_IN_HOUR;
             distanceTraveled = speedMetersPerSecond * timeElapsed;
             // New position
             flight.setDistanceToUs(flight.getDistanceToUs() - distanceTraveled / 1000);
+
         }
 
-        Collections.sort( flights );
+        Collections.sort( flights ); // Ordenación siguiendo la interfaz Comparable (método: compareTo)
     }
 
     public void flightListByAirline() {
-        Collections.sort( flights, Flight.comparadorPorAerolinea );
+        // Ordenación siguiendo la interfaz Comparator (método: compare)
+        Collections.sort( flights, new Flight() );
+
+        showFlightList();
+    }
+
+    public void flightListBySpeed() {
+        Collections.sort( flights, Flight.compareBySpeed );
 
         showFlightList();
     }
