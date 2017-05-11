@@ -19,10 +19,10 @@ public class AirportApp {
     }
 
     private void loadTestFlights() {
-        radar.addflight( new Flight("IB101", "Iberia", 450.0, 400.0, new Date()));
-        radar.addflight( new Flight("RY101", "Ryanair", 1800.0, 410.5, new Date()));
-        radar.addflight( new Flight("IB567", "Iberia", 1097.5, 407.5, new Date()));
-        radar.addflight( new Flight("RY356", "Ryanair", 1295.5, 405.5, new Date()));
+        radar.addflight( new Flight("IB101", "Iberia", 450.0, 14.0, new Date()));
+        radar.addflight( new Flight("RY101", "Ryanair", 1800.0, 10.5, new Date()));
+        radar.addflight( new Flight("IB567", "Iberia", 1097.5, 17.5, new Date()));
+        radar.addflight( new Flight("RY356", "Ryanair", 1295.5, 15.5, new Date()));
     }
 
     public void start() {
@@ -73,6 +73,10 @@ public class AirportApp {
             System.out.println("Distancia a pista: ");
             distanceToUs = scanner.nextDouble();
         } while (distanceToUs < 0.0);
+
+        if ( airline.contains("France") ){
+            return null;
+        }
 
         return new Flight(flightCode, airline, speed, distanceToUs, new Date());
 

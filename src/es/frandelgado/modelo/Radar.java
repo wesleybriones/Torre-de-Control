@@ -3,6 +3,7 @@ package es.frandelgado.modelo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Created by thinway on 7/5/17.
@@ -10,7 +11,8 @@ import java.util.Date;
 public class Radar {
 
     final int MILISECONDS_IN_SECOND = 1000;
-    final int SECONDS_IN_HOUR = 3600;
+    final int METERS_IN_KM = 1000;
+    final int SECONDS_IN_HOUR = 60 * 60;
 
     private ArrayList<Flight> flights;
 
@@ -45,20 +47,23 @@ public class Radar {
         double speedMetersPerSecond;
         double distanceTraveled;
 
+        Iterator<Flight> itFlights = flights.iterator();
 
-
-        for (Flight flight :
-                flights) {
+//        for (Flight flight : flights) {
+        while( itFlights.hasNext() ){
+            Flight flight = itFlights.next();
 
             newDate = new Date();
-
             timeElapsed = (newDate.getTime() - flight.getControlDateTime().getTime()) / MILISECONDS_IN_SECOND;
             flight.setControlDateTime(newDate);
-            speedMetersPerSecond = flight.getSpeed() * MILISECONDS_IN_SECOND / SECONDS_IN_HOUR;
-            distanceTraveled = speedMetersPerSecond * timeElapsed;
+            speedMetersPerSecond = flight.getSpeed() * METERS_IN_KM / SECONDS_IN_HOUR;
+            distanceTraveled = speedMetersPerSecond * timeElapsed / METERS_IN_KM;
             // New position
-            flight.setDistanceToUs(flight.getDistanceToUs() - distanceTraveled / 1000);
+            flight.setDistanceToUs(flight.getDistanceToUs() - distanceTraveled);
 
+            if( flight.getDistanceToUs() == 0.0 ){
+                itFlights.remove();
+            }
         }
 
         Collections.sort( flights ); // Ordenación siguiendo la interfaz Comparable (método: compareTo)
