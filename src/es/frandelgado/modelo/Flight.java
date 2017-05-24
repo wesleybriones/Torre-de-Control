@@ -108,7 +108,7 @@ public class Flight implements Comparable<Flight>, Comparator<Flight> {
 
     @Override
     public int compareTo(Flight flight) {
-        return Double.compare(this.getDistanceToUs(), flight.getDistanceToUs() );
+        return (int)(this.getDistanceToUs() - flight.getDistanceToUs());
     }
 
     @Override

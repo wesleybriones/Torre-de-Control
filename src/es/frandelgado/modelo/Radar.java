@@ -1,9 +1,6 @@
 package es.frandelgado.modelo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Created by thinway on 7/5/17.
@@ -47,11 +44,11 @@ public class Radar {
         double speedMetersPerSecond;
         double distanceTraveled;
 
-        Iterator<Flight> itFlights = flights.iterator();
+        Iterator<Flight> itFlight = flights.iterator();
 
 //        for (Flight flight : flights) {
-        while( itFlights.hasNext() ){
-            Flight flight = itFlights.next();
+        while( itFlight.hasNext() ){
+            Flight flight = itFlight.next();
 
             newDate = new Date();
             timeElapsed = (newDate.getTime() - flight.getControlDateTime().getTime()) / MILISECONDS_IN_SECOND;
@@ -62,7 +59,7 @@ public class Radar {
             flight.setDistanceToUs(flight.getDistanceToUs() - distanceTraveled);
 
             if( flight.getDistanceToUs() == 0.0 ){
-                itFlights.remove();
+                itFlight.remove();
             }
         }
 
