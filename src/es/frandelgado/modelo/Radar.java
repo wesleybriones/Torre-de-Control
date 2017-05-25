@@ -1,5 +1,6 @@
 package es.frandelgado.modelo;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -77,5 +78,27 @@ public class Radar {
         Collections.sort( flights, Flight.compareBySpeed );
 
         showFlightList();
+    }
+
+    public void saveFlights() {
+        try {
+            ObjectOutputStream fichero = new ObjectOutputStream( new FileOutputStream("info/flights.dat"));
+            fichero.writeObject( flights );
+            fichero.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadFlights() {
+        try {
+            ObjectInputStream fichero = new ObjectInputStream(new FileInputStream("info/flights.dat"));
+            flights = (ArrayList<Flight>)fichero.readObject();
+            fichero.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package es.frandelgado.modelo;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
@@ -9,7 +10,9 @@ import java.util.Objects;
 /**
  * Created by thinway on 7/5/17.
  */
-public class Flight implements Comparable<Flight>, Comparator<Flight> {
+public class Flight implements Comparable<Flight>, Comparator<Flight>, Serializable {
+
+    private static final long serialVersionUID = -303304975130302802L;
 
     private String flightCode;
     private String airline;

@@ -15,15 +15,17 @@ public class AirportApp {
 
     public AirportApp() {
         radar = new Radar();
-        loadTestFlights();
+        radar.loadFlights();
+        //loadTestFlights();
     }
 
     private void loadTestFlights() {
-        radar.addflight( new Flight("IB101", "Iberia", 450.0, 14.0, new Date()));
-        radar.addflight( new Flight("RY101", "Ryanair", 1800.0, 10.5, new Date()));
-        radar.addflight( new Flight("IB567", "Iberia", 1097.5, 17.5, new Date()));
-        radar.addflight( new Flight("RY356", "Ryanair", 1295.5, 15.5, new Date()));
+        radar.addflight( new Flight("IB101", "Iberia", 450.0, 1400.0, new Date()));
+        radar.addflight( new Flight("RY101", "Ryanair", 800.0, 1000.5, new Date()));
+        radar.addflight( new Flight("IB567", "Iberia", 697.5, 1700.5, new Date()));
+        radar.addflight( new Flight("RY356", "Ryanair", 295.5, 1500.5, new Date()));
     }
+
 
     public void start() {
         int option;
@@ -42,6 +44,9 @@ public class AirportApp {
                     break;
                 case 4:
                     radar.flightListBySpeed();
+                    break;
+                case 5:
+                    radar.saveFlights();
                     break;
             }
         }
@@ -91,6 +96,7 @@ public class AirportApp {
         System.out.println("* 2 - Lista por proximidad *");
         System.out.println("* 3 - Lista por aerolínea  *");
         System.out.println("* 4 - Lista por velocidad  *");
+        System.out.println("* 5 - Guardar vuelos       *");
         System.out.println("* 0 - Salir                *");
         System.out.println("****************************");
         System.out.println("Opción: ");
