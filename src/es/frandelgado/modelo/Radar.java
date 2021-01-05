@@ -18,7 +18,7 @@ public class Radar {
         flights = new ArrayList<>();
     }
 
-
+// PARA ABARCAR TODAS LAS FUNCIONALIDADES QUE SON REFERENTE A VUELOS, PODRIAMOS USAR EL PATRON FACADE
     public void addflight(Flight flight) {
         if( flight != null){
             flights.add(flight);
